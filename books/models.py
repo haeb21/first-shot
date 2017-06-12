@@ -22,7 +22,7 @@ class Book(models.Model):
 		if (self.review and self.date_reviewed is None):
 			self.date_reviewed = now()
 			
-			super(Book, self).save(*args, **kwargs)
+		super(Book, self).save(*args, **kwargs)
 		
 		
 class Author(models.Model):
