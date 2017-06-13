@@ -1,17 +1,7 @@
+{% extends "base.html" %}
 
-<html>
-	<head>
-		<title>A book</title>
-	</head>
-	<body>
-		{% if book.review %}
-			<div class="book">
-				<h3>{{ book.title }}</h3>
-				<p>By {% for author in book.authors.all %}{{ author.name }}{% endfor %}</p>
-				{% if book.is_favorite %}<p class="highlight">favorite</p>{% endif %}
-				<p>{{ book.review|linebreaks }}</p>
-			</div>
-		{% endif %}
-	</body>
-
-</html>
+{% block content %}
+	{% if book.review %}
+		{% include "book-detail.html" %}
+	{% endif %}
+{% endblock %}
