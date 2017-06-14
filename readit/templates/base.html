@@ -17,7 +17,7 @@
 				<img src="{% static 'img/logo.png' %}" alt="ReadIt!" class="logo" />
 				<div class="welcome">
 					{% if request.user.is_authenticated %}
-						<p>Hello {{ request.user.username|title}}, you last logged in at {{ request.user.last_login }}</p>
+						<p>Hello {{ request.user.username|title}}, you last logged in at {{ request.user.last_login|date:"D d M Y" }}</p>
 					{% else %}
 						<p>Welcome guest!</p>
 					{% endif %}
