@@ -69,3 +69,6 @@ class TestReviewList(TestCase):
 		)
 		
 		self.assertIsNotNone(Book.objects.get(title="My Brand New Book"))
+
+
+
