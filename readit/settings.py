@@ -15,17 +15,21 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DJANGO_MODE = os.getenv('DJANGO_MODE', "Production").lower()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p79)2ghqi90p)!achz0za#rp-@v)un#z8twe)r#_xt5=je=irn'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+if DJANGO_MODE == 'local':
+	DEBUG = True
+else:
+	DEBUG = False
+	
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -38,9 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'debug_toolbar',
     'books',
 ]
+
+if DJANGO_MODE == 'local':
+	INSTALLED_APPS += (
+		'debug_toolbar',
+	)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -79,12 +87,13 @@ WSGI_APPLICATION = 'readit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+if DJANGO_MODE == 'local':
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+		}
+	}
 
 
 # Password validation
