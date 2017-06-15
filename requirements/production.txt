@@ -1,0 +1,9 @@
+-r base.txt
+
+ipaddress==1.0.18
+python-dateutil==2.6.0
+pytz==2017.2
+six==1.10.0
+psycopg2==2.7.1
+uWSGI==2.0.7
+dj-database-url==0.3.0
